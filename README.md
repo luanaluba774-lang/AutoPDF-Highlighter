@@ -1,104 +1,114 @@
-# 📄 AutoPDF Highlighter
+# AutoPDF Highlighter
 
-Aplicativo desktop em Python que destaca automaticamente palavras-chave em documentos PDF, gerando uma cópia grifada do arquivo original. Útil para acelerar a leitura de documentos extensos (contratos, editais, artigos, apostilas) onde é preciso localizar rapidamente termos específicos.
+Aplicação desktop desenvolvida em Python para destacar automaticamente palavras-chave em documentos PDF. O programa analisa o arquivo, identifica todas as ocorrências dos termos configurados e gera uma nova versão do documento com as marcações, preservando o arquivo original.
+
+O projeto foi desenvolvido para facilitar a análise de documentos extensos, como contratos, editais, artigos e apostilas.
 
 ![status](https://img.shields.io/badge/status-concluído-brightgreen)
 ![python](https://img.shields.io/badge/python-3.10%2B-blue)
-![license](https://img.shields.io/badge/license-MIT-lightgrey)
 
-## ✨ Funcionalidades
+## Funcionalidades
 
-- Seleção de PDF via drag & drop ou interface gráfica
-- Preview em miniatura da primeira página do PDF selecionado
-- Cadastro e gerenciamento de palavras-chave (persistidas em `keywords.json`)
-- Destaque automático de todas as ocorrências no documento
-- Processamento em segundo plano (a interface não trava durante a leitura do PDF)
-- Relatório de ocorrências por palavra-chave, exportável em CSV
-- Abertura automática do arquivo grifado ao final
-- Interface moderna com suporte a tema claro/escuro
+* Seleção de arquivos por interface gráfica ou drag and drop
+* Visualização da primeira página do PDF antes do processamento
+* Cadastro e gerenciamento de palavras-chave com persistência em `keywords.json`
+* Destaque automático de todas as ocorrências encontradas
+* Processamento em segundo plano, mantendo a interface responsiva
+* Exportação de relatório de ocorrências em formato CSV
+* Abertura automática do PDF gerado
+* Suporte aos temas claro e escuro
 
-## 🖼️ Screenshot
+## Captura de tela
+<img width="957" height="1017" alt="image" src="https://github.com/user-attachments/assets/2412f10a-06ce-4ac7-8bc2-2543eb936050" />
+<img width="466" height="606" alt="image" src="https://github.com/user-attachments/assets/a0b9f4aa-142f-498e-beed-b6324e4a7ec8" />
+<img width="937" height="585" alt="image" src="https://github.com/user-attachments/assets/ae23c97b-c406-48a1-b036-c10d519ad456" />
+<img width="546" height="222" alt="image" src="https://github.com/user-attachments/assets/ae5aeefa-fb87-452a-a47c-041a30e209b5" />
+<img width="977" height="826" alt="image" src="https://github.com/user-attachments/assets/b45348b9-d9f0-410e-9d0c-9c30b18e6027" />
 
-<!-- Adicione um print da tela aqui, ex: -->
-<!-- ![screenshot](assets/screenshot.png) -->
 
-## 🛠️ Tecnologias
+## Tecnologias
 
-- [Python 3](https://www.python.org/)
-- [PyMuPDF (fitz)](https://pymupdf.readthedocs.io/) — leitura e manipulação de PDFs
-- [CustomTkinter](https://github.com/TomSchimansky/CustomTkinter) — interface gráfica
-- [Pillow](https://pillow.readthedocs.io/) — geração da miniatura do PDF
-- [tkinterdnd2](https://github.com/pmgagne/tkinterdnd2) — suporte a drag & drop
-- [PyInstaller](https://pyinstaller.org/) — empacotamento em executável
+* Python 3.10+
+* PyMuPDF
+* CustomTkinter
+* Pillow
+* tkinterdnd2
+* PyInstaller
 
-## 🚀 Como executar
+## Instalação
+
+Clone o repositório:
 
 ```bash
-# Clone o repositório
 git clone https://github.com/seu-usuario/autopdf-highlighter.git
 cd autopdf-highlighter
+```
 
-# Crie um ambiente virtual (opcional, mas recomendado)
+Crie um ambiente virtual (opcional, mas recomendado):
+
+```bash
 python -m venv venv
-venv\Scripts\activate      # Windows
-source venv/bin/activate   # Linux/Mac
 
-# Instale as dependências
+# Windows
+venv\Scripts\activate
+
+# Linux/macOS
+source venv/bin/activate
+```
+
+Instale as dependências:
+
+```bash
 pip install -r requirements.txt
+```
 
-# Execute
+Execute a aplicação:
+
+```bash
 python main.py
 ```
 
-## 📦 Gerando um executável (.exe)
+## Gerando o executável
 
-O projeto já vem com scripts prontos usando [PyInstaller](https://pyinstaller.org/):
+O projeto inclui scripts para geração do executável utilizando o PyInstaller.
 
 ```bash
 # Windows
 build.bat
 
-# Linux/Mac
+# Linux/macOS
 ./build.sh
 ```
 
-O executável é gerado na pasta `dist/`.
+O executável será gerado na pasta `dist/`.
 
-## 📂 Estrutura do projeto
+## Estrutura do projeto
 
-```
+```text
 autopdf-highlighter/
-├── main.py               # aplicação principal
-├── keywords.json          # lista de palavras-chave salvas
-├── requirements.txt       # dependências para rodar o app
-├── requirements-dev.txt   # dependências extras para gerar o executável
-├── build.bat / build.sh   # scripts de empacotamento (PyInstaller)
+├── main.py
+├── keywords.json
+├── requirements.txt
+├── requirements-dev.txt
+├── build.bat
+├── build.sh
 └── README.md
 ```
 
-## 💡 Como funciona
+## Funcionamento
 
-1. O usuário seleciona um arquivo PDF.
-2. Cadastra as palavras-chave que deseja localizar (ex: "Cláusula", "Confidencial", "Multa").
-3. Ao clicar em "Processar PDF", o app percorre cada página do documento com o [PyMuPDF](https://pymupdf.readthedocs.io/), localiza as ocorrências de cada palavra e aplica uma anotação de destaque (highlight).
-4. Um novo arquivo é salvo com o sufixo `_highlighted.pdf`, preservando o original.
+1. Selecione um arquivo PDF.
+2. Informe as palavras-chave que deseja localizar.
+3. O documento é processado utilizando o PyMuPDF.
+4. Todas as ocorrências encontradas recebem uma anotação de destaque.
+5. Um novo arquivo é salvo com o sufixo `_highlighted.pdf`, mantendo o documento original inalterado.
 
-## 📌 Melhorias futuras
+## Próximas melhorias
 
-- [x] Suporte a drag & drop de arquivos
-- [x] Preview em miniatura do PDF antes de processar
-- [x] Empacotamento como executável (`.exe`) via PyInstaller
-- [x] Exportar relatório de ocorrências (quantidade por palavra)
-- [ ] Suporte a múltiplos PDFs em lote
-- [ ] Testes automatizados (pytest)
+* [x] Suporte a drag and drop
+* [x] Visualização da primeira página do PDF
+* [x] Geração de executável com PyInstaller
+* [x] Exportação de relatório em CSV
+* [ ] Processamento de múltiplos PDFs
 
-## 👨‍💻 Autor
 
-Projeto desenvolvido por [seu nome] como parte dos estudos em Análise e Desenvolvimento de Sistemas (ADS).
-
-- LinkedIn: [seu link]
-- GitHub: [seu link]
-
-## 📄 Licença
-
-Este projeto está sob a licença MIT — veja o arquivo [LICENSE](LICENSE) para mais detalhes.
